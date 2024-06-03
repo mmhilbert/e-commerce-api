@@ -51,7 +51,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Credits
 [GitHub Repo](https://github.com/mmhilbert/e-commerce-api) <br>
-[Application Video](https://drive.google.com/file/d/14k-lqb2DHIqXfdWqJw1bESBTiSnsjlhF/view?usp=sharing)
+[Application Video](https://drive.google.com/file/d/14lGThr6lGNSouRA_sVDMRBJXMvNS-PZq/view?usp=sharing)
 
 
 
