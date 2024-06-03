@@ -9,15 +9,25 @@ router.get('/', async (req, res) => {
   try {
     const categoryData = await Category.findAll()
     res.json(categoryData)
-  } catch {
+  } catch(err) {
     console.log(err)
     res.status(500).send('Error getting all categories')
   }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find one category by its `id` value
+  const { id } = req.params
   // be sure to include its associated Products
+  try {
+    const categoryData = await Category.findByPk(id, {
+      include: [{ model: Product }]
+    })
+    res.json(categoryData)
+  } catch(err) {
+    console.log(err)
+    res.status(500).send(`Error getting category ${id}`)
+  }
 });
 
 router.post('/', async (req, res) => {
@@ -27,17 +37,39 @@ router.post('/', async (req, res) => {
       category_name: req.body.category_name,
     })
     res.json(newCategory)
-  } catch {
-
+  } catch(err) {
+    console.log(err)
+    res.status(500).send('Error creating category')
   }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
+  const { id } = req.params
+  // be sure to include its associated Products
+  try {
+    const categoryUpdated = await Category.update(req.body, {
+      where: { id }
+    })
+    res.json(categoryUpdated)
+  } catch(err) {
+    console.log(err)
+    res.status(500).send(`Error updating category ${id}`)
+  }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
+  const { id } = req.params
+  try {
+    const categoryDestroyed = await Category.destroy({
+      where: { id }
+    })
+    res.json(categoryDestroyed)
+  } catch(err) {
+    console.log(err)
+    res.status(500).send(`Error deleting category ${id}`)
+  }
 });
 
 module.exports = router;
